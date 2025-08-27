@@ -22,7 +22,11 @@ It does not compute a global path but continuously evaluates feasible motion com
 
 $$
 x_{t+1} = x_t + v \cdot \cos(\theta) \cdot \Delta t \\
+$$
+$$
 y_{t+1} = y_t + v \cdot \sin(\theta) \cdot \Delta t \\
+$$
+$$
 \theta_{t+1} = \theta_t + \omega \cdot \Delta t
 $$
 
