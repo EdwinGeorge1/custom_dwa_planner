@@ -1,4 +1,4 @@
-#  Custom DWA Local Planner (ROS2 Humble)
+# Custom DWA Local Planner (ROS2 Humble)
 
 This package implements a **Dynamic Window Approach (DWA) local planner** from scratch in Python for a TurtleBot3 robot in Gazebo.  
 It replaces the default `nav2_dwb_controller` with a lightweight, fully custom implementation.
@@ -7,45 +7,46 @@ It replaces the default `nav2_dwb_controller` with a lightweight, fully custom i
 
 ## What is DWA?
 
-The **Dynamic Window Approach (DWA)** is a local planner for mobile robots that selects the best velocity command \( (v, \omega) \) at each time step based on trajectory simulation, obstacle avoidance, and goal direction. It does not compute a global path but continuously evaluates feasible motion commands for safe and efficient navigation.
+The **Dynamic Window Approach (DWA)** is a local planner for mobile robots that selects the best velocity command $(v, \omega)$ at each time step based on trajectory simulation, obstacle avoidance, and goal direction.  
+It does not compute a global path but continuously evaluates feasible motion commands for safe and efficient navigation.
 
 ---
 
 ### 🔹 Algorithm Steps
 
 1. **Velocity Sampling**  
-   Generate candidate linear velocities \( v \) and angular velocities \( \omega \) within the robot's dynamic constraints.
+   Generate candidate linear velocities $v$ and angular velocities $\omega$ within the robot's dynamic constraints.
 
 2. **Trajectory Prediction**  
-   For each pair \( (v, \omega) \), simulate short-horizon motion with:
+   For each pair $(v, \omega)$, simulate short-horizon motion using:
 
-   $$
-   x_{t+1} = x_t + v \cdot \cos(\theta) \cdot \Delta t \\
-   y_{t+1} = y_t + v \cdot \sin(\theta) \cdot \Delta t \\
-   \theta_{t+1} = \theta_t + \omega \cdot \Delta t
-   $$
+$$
+x_{t+1} = x_t + v \cdot \cos(\theta) \cdot \Delta t \\
+y_{t+1} = y_t + v \cdot \sin(\theta) \cdot \Delta t \\
+\theta_{t+1} = \theta_t + \omega \cdot \Delta t
+$$
 
 3. **Trajectory Evaluation**  
    Score each trajectory by:
    - **Heading cost:** How well does the trajectory point to the goal?  
-   - **Clearance cost:** What is the minimum distance to nearest obstacle?  
-   - **Velocity cost:** Is faster motion rewarded when safe?
+   - **Clearance cost:** Minimum distance to nearest obstacle.  
+   - **Velocity cost:** Rewards faster motion when safe.
 
-   Full score:
+   Full score formula:
 
-   $$
-   G(v, \omega) = w_{\text{heading}} \cdot f_{\text{heading}} 
-   + w_{\text{clearance}} \cdot f_{\text{clearance}} 
-   + w_{\text{velocity}} \cdot f_{\text{velocity}}
-   $$
+$$
+G(v, \omega) = w_{\text{heading}} \cdot f_{\text{heading}} 
++ w_{\text{clearance}} \cdot f_{\text{clearance}} 
++ w_{\text{velocity}} \cdot f_{\text{velocity}}
+$$
 
 4. **Command Selection**  
-   Choose the \( (v, \omega) \) with highest score.  
-   If all candidate trajectories are in collision, the robot rotates in place as recovery.
+   Choose the $(v, \omega)$ with the highest score.  
+   If all candidate trajectories are in collision, the robot rotates in place as a recovery.
 
 ---
 
-##  Features
+## Features
 
 - Complete **DWA local planner** written in Python (`rclpy`)
 - Visualizes:
@@ -57,7 +58,7 @@ The **Dynamic Window Approach (DWA)** is a local planner for mobile robots that 
 
 ---
 
-##  Installation & Build
+## Installation & Build
 
 Clone into your ROS2 workspace `src` folder:
 
