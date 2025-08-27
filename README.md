@@ -21,13 +21,11 @@ It does not compute a global path but continuously evaluates feasible motion com
    For each pair $(v, \omega)$, simulate short-horizon motion using:
 
 $$
-x_{t+1} = x_t + v \cdot \cos(\theta) \cdot \Delta t \\
-$$
-$$
-y_{t+1} = y_t + v \cdot \sin(\theta) \cdot \Delta t \\
-$$
-$$
-\theta_{t+1} = \theta_t + \omega \cdot \Delta t
+\begin{aligned}
+x_{t+1} &= x_t + v \cdot \cos(\theta) \cdot \Delta t \\
+y_{t+1} &= y_t + v \cdot \sin(\theta) \cdot \Delta t \\
+\theta_{t+1} &= \theta_t + \omega \cdot \Delta t
+\end{aligned}
 $$
 
 3. **Trajectory Evaluation**  
@@ -39,10 +37,11 @@ $$
    Full score formula:
 
 $$
-G(v, \omega) = w_{\text{heading}} \cdot f_{\text{heading}} 
-+ w_{\text{clearance}} \cdot f_{\text{clearance}} 
-+ w_{\text{velocity}} \cdot f_{\text{velocity}}
+G(v, \omega) = w_{\text{heading}} \cdot f_{\text{heading}} + 
+w_{\text{clearance}} \cdot f_{\text{clearance}} + 
+w_{\text{velocity}} \cdot f_{\text{velocity}}
 $$
+
 
 4. **Command Selection**  
    Choose the $(v, \omega)$ with the highest score.  
